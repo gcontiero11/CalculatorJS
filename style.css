@@ -1,0 +1,150 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap'); */
+
+body{
+    padding-top: 100px;
+    background-color: #337CCF;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 100px 100px 1fr ;
+}
+
+header{
+    background-color: #1450A3;
+    display: grid;
+    grid-column: 2/3 ;
+    grid-row: 1/2;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr;
+}
+.title{
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    grid-row: 1;
+    grid-column: 2/3;
+}
+
+#screen{
+    /* border-left:solid #1450A3 5px;
+    border-right:solid #1450A3 5px; */
+    display: flex;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    background-color: #191D88;
+}
+
+main{
+    grid-row: 3/4;
+    grid-column: 2/3;
+
+}
+
+p{  
+    font-family: 'Poppins', sans-serif;
+    padding-left: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: #fff;
+}
+
+.numbers:hover{
+    background-color: #237efd;
+}
+
+.numbers{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color : #fff;
+    height: 75px ;
+    background-color: #1450A3;
+    border: 0px;
+    transition: 150ms;
+}
+
+.operators:hover{
+    background-color: #237efd;
+}
+
+.operators{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color : #fff;
+    height: 75px ;
+    background-color: #1450A3;
+    border: 0px;
+    transition: 150ms;
+}
+
+.button_box{
+    font-size: 10px;
+    font-weight:bold;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+#nbr_0{
+    grid-row: 4/5;
+    grid-column: 1/4;
+}
+#nbr_1{
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+#nbr_2{
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+#nbr_3{
+    grid-row: 1/2;
+    grid-column: 3/4;
+}
+#nbr_4{
+    grid-row: 2/3;
+    grid-column: 1/2;
+}
+#nbr_5{
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+#nbr_6{
+    grid-row: 2/3;
+    grid-column: 3/4;
+}
+#nbr_7{
+    grid-row: 3/4;
+    grid-column: 1/2;
+}
+#nbr_8{
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+#nbr_9{
+    grid-row: 3/4;
+    grid-column: 3/4;
+}
+#plus{
+    grid-row: 1/2;
+    grid-column: 4/5;
+}
+#sub{
+    grid-row: 2/3;
+    grid-column: 4/5;
+}
+#mult{
+    grid-row: 3/4;
+    grid-column: 4/5;
+}
+#div{
+    grid-row: 4/5;
+    grid-column: 4/5;
+}
+#enter{
+    background-color: #FFC436;
+    height: auto;
+    grid-row: 1/5;
+    grid-column: 5/6 ;
+}
+#enter:hover{
+    background-color: #ffd83b;
+}
