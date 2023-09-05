@@ -4,6 +4,7 @@ let n1 = 0;
 let n2 = 0;
 let preencheu_n1 = false;
 let resultadoApareceu = false;
+let possuiponto = false;
 let operacoes = ["soma" , "subtracao" , "multiplicacao", "divisao"];
 let operacao = operacoes[0];
 let elemento;
@@ -30,15 +31,25 @@ function isSim(elemento){
     return simbolo;
 }
 
-function tratarNumero(elemento,preencheu_n1){
-    if(elemento == "1" || elemento == "2" || elemento == "3" || elemento == "4" || elemento == "5" || elemento == "6" || elemento == "7" || elemento == "8" || elemento == "9" || elemento == "0"){
+function tratarNumero(elemento,preencheu_n1,possuiponto){
+    if(possuiponto){
+        if(!preencheu_n1){
+            n1 = n1 * 10 + parseInt(elemento);
+            n1 = n1 / 10;
+        }
+        else{
+            n2 = n2 * 10 + parseInt(elemento);
+            n2 = n2 / 10;
+        }
+    }
+    else{
         if(!preencheu_n1){
             n1 = n1 * 10 + parseInt(elemento);
         }
         else{
             n2 = n2 * 10 + parseInt(elemento);
         }
-    } 
+    }
 }
 
 function tratarSimbolo(elemento){
@@ -99,7 +110,7 @@ function interacaoTela(elemento,resultadoApareceu){
             resultadoApareceu = false;
         }
         else{
-            if(elemento != "ENTER"){
+            if(elemento != "ENTER" && elemento != "."){
                 screen.innerText = elemento;    
                 resultadoApareceu = false;
             }
@@ -108,7 +119,7 @@ function interacaoTela(elemento,resultadoApareceu){
     return resultadoApareceu
 }
 
-for(i=0;i<15;i++){
+for(i=0;i<16;i++){
     screen.innerText = " ";
     
     button[i].addEventListener("click", (e) => {
@@ -121,13 +132,14 @@ for(i=0;i<15;i++){
 
         if(numero){
             resultadoApareceu = interacaoTela(elemento,resultadoApareceu);
-            tratarNumero(elemento,preencheu_n1);
+            tratarNumero(elemento,preencheu_n1,possuiponto);
         }  
         else{
             if(simbolo){
                 if(!preencheu_n1 && resultadoApareceu){
                     n1 = resultadoTela;
                     preencheu_n1 = true;
+                    possuiponto = false;
                     resultadoApareceu = false;
                     resultadoApareceu = interacaoTela(elemento,resultadoApareceu);
                     i = tratarSimbolo(elemento);  
@@ -135,22 +147,28 @@ for(i=0;i<15;i++){
                 else{
                     if(!preencheu_n1){
                         preencheu_n1 = true;
+                        possuiponto = false;
                         resultadoApareceu = interacaoTela(elemento,resultadoApareceu);
                         i = tratarSimbolo(elemento);
                     }
                 }
             }
             else{
-
-                if(preencheu_n1){
-                    operacao = operacoes[i];
-                    preencheu_n1 = false;
-                    resultadoApareceu = true;
-                    resultadoTela = tratarEnter(operacao);
-                    n1 = 0;
-                    n2 = 0;
+                if(elemento == "."){
+                    resultadoApareceu = interacaoTela(elemento,resultadoApareceu);
+                    possuiponto = true;
                 }
-
+                else{
+                    if(preencheu_n1){
+                        operacao = operacoes[i];
+                        preencheu_n1 = false;
+                        resultadoApareceu = true;
+                        possuiponto = false;
+                        resultadoTela = tratarEnter(operacao);
+                        n1 = 0;
+                        n2 = 0;
+                    }
+                }
             }
         }
     })
