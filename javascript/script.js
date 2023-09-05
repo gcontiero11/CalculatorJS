@@ -76,25 +76,25 @@ function tratarEnter(operacao,resultadoTela){
         case "soma":
             resultadoTela = n1 + n2;
             console.log("somou " + n1 + " com " + n2 + " = " + (resultadoTela));
-            screen.innerText = resultadoTela;
+            screen.innerText = parseFloat(resultadoTela.toFixed(3));
             break;
         
         case "subtracao":
             resultadoTela = n1 - n2;
             console.log("subtraiu " + n1 + " com " + n2 + " = " + (resultadoTela));
-            screen.innerText = n1 - n2;
+            screen.innerText = parseFloat(resultadoTela.toFixed(3));
             break;
             
         case "multiplicacao":
             resultadoTela = n1 * n2;
             console.log("multiplicou " + n1 + " com " + n2 + " = " + (resultadoTela));
-            screen.innerText = n1 * n2;
+            screen.innerText = parseFloat(resultadoTela.toFixed(3));
             break;
             
         case "divisao":
             resultadoTela = n1 / n2;
             console.log("dividiu " + n1 + " com " + n2 + " = " + (resultadoTela));
-            screen.innerText = n1 / n2;
+            screen.innerText = parseFloat(resultadoTela.toFixed(3));
             break;
     }
     return resultadoTela;
