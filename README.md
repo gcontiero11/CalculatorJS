@@ -1,2 +1,0 @@
-# CalculatorJS
-## STATUS: Unfinished
