@@ -1,68 +1,103 @@
-button = document.querySelectorAll("button");
+buttons = document.querySelectorAll("button");
 let screen = document.querySelector("p");
-let resultadoApareceu = false;
-let operacaoDefinida = false;
-let precisaSerNumero = false;
-let possuiponto = false;
-let preencheu_n1 = false;
+let operationDefined = false;
+let havedot = false;
+let resultShown = false;
+let onlyNumber = true;
 let save;
-let elemento;
-let resultadoTela;
+let value;
 
+function isNumber(value){
+    if(!isNaN(value)){
+        return true;
+    }
+    return false;
+}
 
-for(i=0;i<16;i++){
+function isOperator(value){
+    if(isNaN(value) && value != "." && value != "="){
+        return true;
+    }
+    return false;
+}
+
+function changeOperation(save,value){
+    screen.innerText = save + value;
+}
+
+function addElement(value){
+    screen.innerText = screen.innerText + value;
+}
+
+function replaceElement(value){
+    screen.innerText = value;
+}
+
+for(i=0;i<buttons.length;i++){
     screen.innerText = "";
     
-    button[i].addEventListener("click", (e) => {
+    buttons[i].addEventListener("click", (e) => {
         
-        elemento = e.target.innerText;
-        console.log(elemento);
+        value = e.target.innerText;
+        console.log(value);
 
-        if(! isNaN(elemento)){
-            if(resultadoApareceu){
-                screen.innerText = elemento;
-                resultadoApareceu = false;
+        firstElement = screen.innerText[0];
+        lastElement =screen.innerText[screen.innerText.length - 1];
+
+        console.log(`Ultimo value da tela: ${lastElement}`);
+        console.log(firstElement);
+
+        if(isNumber(value)){
+            if(firstElement == 0 && lastElement == 0){
+                screen.innerText = "";
+            }
+            if((isOperator(lastElement) && !onlyNumber)){
+                operationDefined = true;
+                addElement(value);
             }
             else{
-                if(preencheu_n1){
-                    operacaoDefinida = true;
-                    possuiponto = false;
+                if(resultShown){
+                    replaceElement(value);
+                    resultShown = false;
+                    havedot = false;
                 }
-                screen.innerText = screen.innerText + elemento;
+                else{
+                    addElement(value);
+                }
             }
-            precisaSerNumero = false;
-        }  
+            save = screen.innerText;
+            onlyNumber = false;
+        }
         else{
-            if(!precisaSerNumero){
-                if(elemento != "="){
-                    if(elemento == "." && !possuiponto && !resultadoApareceu){
-                        precisaSerNumero = true;
-                        possuiponto = true;
-                        screen.innerText = screen.innerText + elemento;
-                    }
-                    else{
-                        if(elemento != "."){
-                            if(!preencheu_n1){
-                                save = screen.innerText;
-                                screen.innerText = screen.innerText + elemento;
-                                preencheu_n1 = true;
-                            }
-                            else{
-                                if(!operacaoDefinida){
-                                    screen.innerText = save + elemento;
-                                }
-                            }
-                            resultadoApareceu = false;   
-                        }
+            if(!onlyNumber){
+                if(value == "="){
+                    if(isNumber(lastElement) && operationDefined){
+                      screen.innerText = eval(screen.innerText);
+                      save = screen.innerText;
+                      resultShown = true;
+                      havedot = true;
+                      operationDefined = false;
                     }
                 }
                 else{
-                    resultadoTela = eval(screen.innerText);
-                    screen.innerText = resultadoTela;
-                    resultadoApareceu = true;
-                    preencheu_n1 = false;
-                    operacaoDefinida = false
-                    possuiponto = false;
+                    if(value == "."){
+                        if(isNumber(lastElement) && !havedot){
+                            addElement(value);
+                            havedot = true;
+                        }
+                    }
+                    else{
+                        if(!operationDefined){
+                            havedot = false;
+                            resultShown = false;
+                            if(isOperator(lastElement)){
+                                changeOperation(save,value);
+                            }
+                            else{
+                                addElement(value);
+                            }
+                        }
+                    }
                 }
             }
         }
